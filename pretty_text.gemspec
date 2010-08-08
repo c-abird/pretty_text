@@ -5,8 +5,10 @@ SPEC = Gem::Specification.new do |s|
   s.version = '0.1'
   s.date = '2010-08-08'
   s.author = 'Claas Abert'
-  #s.email = ''
-  s.summary = 'A TTF font rendering plugin for rails using RMagick.'
+  s.email = 'claas@cabird.de'
+  s.homepage = 'http://cabird.de'
+  s.summary = 'A TTF font rendering plugin for rails.'
+  s.description = 'pretty_text uses RMagick to render text and provides helpers for the integration in your views'
   
   s.platform = Gem::Platform::RUBY
 
