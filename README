@@ -1,0 +1,9 @@
+PrettyText
+============
+
+Put your TTF fonts in the fonts/ directory.
+Use the pretty_text helper to include rendered texts in your views:
+
+<%= pretty_text "here goes the text", {:font => 'gill.ttf',
+                                       :size => 12,
+                                       :color => '#f00'} %>
