@@ -45,6 +45,7 @@ module PrettyText# :nodoc:
                  :size => 12,
                  :font => nil,
                  :upcase => false,
+                 :downcase => false,
                  :extra_width => 0,
                  :xextra => 0,
                  :xoffset => 0,
@@ -82,7 +83,9 @@ module PrettyText# :nodoc:
     # Applies all text transformations to a given text, which includes only the
     # <tt>upcase</tt> option at the moment. Returns the transformed text.
     def process_text(text)
-      return (self.upcase == true) ? Unicode::upcase(text) : text
+      text = Unicode::upcase(text)   if self.upcase
+      text = Unicode::downcase(text) if self.downcase
+      return text
     end
 
     # Generates a hash string of all attributes and a given string. This method is used

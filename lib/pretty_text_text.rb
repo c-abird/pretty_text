@@ -41,7 +41,7 @@ module PrettyText # :nodoc:
       # set up paths
       public_image_path = @@config[:image_path] || File.join('system' , 'pretty_text')
       public_path = File.join(public_image_path, style.generate_filename(text))
-      absolute_path = File.join(RAILS_ROOT, 'public', public_path)
+      absolute_path = File.join(Rails.root, 'public', public_path)
 
       # render small fonts bigger and scale down later
       size = style.size
@@ -52,7 +52,7 @@ module PrettyText # :nodoc:
         FileUtils.mkpath(File.dirname(absolute_path)) unless File.exists?(File.dirname(absolute_path))
 
         gc = Magick::Draw.new
-        gc.font = File.join(RAILS_ROOT, 'fonts', style.font) if style.font
+        gc.font = File.join(Rails.root, 'fonts', style.font) if style.font
         gc.pointsize = size
         gc.kerning(style.kerning)
         gc.interline_spacing = style.interline_spacing
@@ -136,7 +136,7 @@ module PrettyText # :nodoc:
     # Retrieves the geometry of the image and saves it to the <tt>@width</tt> and
     # <tt>@height</tt> attributes of the class
     def get_geometry
-      image = Magick::Image.read(File.join(RAILS_ROOT, 'public', @public_path)).first
+      image = Magick::Image.read(File.join(Rails.root, 'public', @public_path)).first
       @width = image.columns
       @height = image.rows / (@style.additional_colors.size + 1)
     end
