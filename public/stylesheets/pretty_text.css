@@ -1,0 +1,6 @@
+.pretty_text {
+  display: block;
+  overflow: hidden;
+  background-position: left top;
+  height: 0;
+}
