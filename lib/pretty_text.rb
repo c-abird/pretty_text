@@ -1,3 +1,5 @@
-module PrettyText
-  require 'engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3
-end
+require 'pretty_text/pretty_text_text'
+require 'pretty_text/pretty_text_helper'
+require 'pretty_text/pretty_text_style'
+
+require 'pretty_text/engine'

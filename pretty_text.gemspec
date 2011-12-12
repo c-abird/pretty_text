@@ -4,32 +4,28 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{pretty_text}
+  s.name = "pretty_text"
   s.version = "0.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Claas Abert"]
-  s.date = %q{2011-11-27}
-  s.email = %q{claas@cabird.de}
+  s.date = "2011-12-12"
+  s.email = "claas@cabird.de"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
   ]
   s.files = [
     "app/assets/stylesheets/pretty_text.css",
-    "lib/engine.rb",
     "lib/pretty_text.rb",
-    "lib/pretty_text_helper.rb",
-    "lib/pretty_text_style.rb",
-    "lib/pretty_text_text.rb"
+    "lib/pretty_text/engine.rb",
+    "lib/pretty_text/pretty_text_helper.rb",
+    "lib/pretty_text/pretty_text_style.rb",
+    "lib/pretty_text/pretty_text_text.rb"
   ]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Description of your gem}
-  s.test_files = [
-    "test/helper.rb",
-    "test/test_pretty_text.rb"
-  ]
+  s.rubygems_version = "1.8.10"
+  s.summary = "Description of your gem"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
