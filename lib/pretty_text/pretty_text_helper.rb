@@ -24,7 +24,7 @@ module ApplicationHelper
   #
   # Use the html_options to append HTML options to the tag:
   #   <%= pretty_text("the text", @style, 'h1', {:class => "myclass"})
-  def pretty_text(str, style = nil, tag="span", html_options = {})
+  def pretty_text(str, style = nil, tag="span", html_options = {}, options = {})
     text = PrettyText::Text.create(str, style);
 
     html_options[:class] = [html_options[:class]].push("pretty_text").compact.join(" ")
@@ -35,7 +35,7 @@ module ApplicationHelper
     style << "background-image: url('#{image_path(text.path)}');"
 
     ret =  "<#{tag} style=\"#{style}\"#{tag_options}>"
-    ret << h(text.content)
+    ret << h(text.content) unless options[:only_image]
     ret << "</#{tag}>"
 
     raw(ret)
