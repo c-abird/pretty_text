@@ -2,5 +2,7 @@
   display: block;
   overflow: hidden;
   background-position: left top;
-  height: 0;
+  color: transparent;
+  font-family: sans-serif;
+  font-weight: normal;
 }

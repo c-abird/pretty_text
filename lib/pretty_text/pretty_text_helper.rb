@@ -31,7 +31,7 @@ module ApplicationHelper
     #convert_options_to_javascript!(html_options)
     tag_options = tag_options(html_options)
 
-    style  = "width:#{text.width}px;padding-top:#{text.height}px;"
+    style  = "width:#{text.width}px;height:#{text.height}px;font-size:#{style.size}px;"
     style << "background-image: url('#{image_path(text.path)}');"
 
     ret =  "<#{tag} style=\"#{style}\"#{tag_options}>"

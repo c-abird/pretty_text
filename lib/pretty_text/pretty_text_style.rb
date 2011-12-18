@@ -108,11 +108,12 @@ module PrettyText# :nodoc:
     # Clones this <tt>PrettyTextStyle</tt> object and returns an altered version of the clone.
     # You can override attributes with the argument.
     def alter(attributes = Hash.new)
-      result = Hash.new
-      @@default.keys.each do |key|
-        result[key] = (attributes[key]) ? attributes[key] :
-                                          @attributes[key]
-      end
+      #result = Hash.new
+      result = @@default.merge(@attributes).merge(attributes)
+      #@@default.keys.each do |key|
+      #  result[key] = (attributes[key]) ? attributes[key] :
+      #                                    @attributes[key]
+      #end
       return self.class.new(result)
     end
   end
