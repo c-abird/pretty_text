@@ -25,7 +25,7 @@ module ApplicationHelper
   # Use the html_options to append HTML options to the tag:
   #   <%= pretty_text("the text", @style, 'h1', {:class => "myclass"})
   def pretty_text(str, style = nil, tag="span", html_options = {}, options = {})
-    text = PrettyText::Text.create(str, style);
+    text = PrettyText::Text.create(str, style)
 
     html_options[:class] = [html_options[:class]].push("pretty_text").compact.join(" ")
     #convert_options_to_javascript!(html_options)
@@ -41,12 +41,30 @@ module ApplicationHelper
     raw(ret)
   end
 
+  def pretty_paragraph(html, styles)
+    frag = Nokogiri::HTML::DocumentFragment.parse(html)
+    styles.each do |element, pstyle|
+      frag.xpath(element.to_s).each do |div|
+        text = PrettyText::Text.create(div.inner_html, pstyle)
+        div.set_attribute("class" , "pretty_text")
+        style  = "width:#{text.width}px;height:#{text.height}px;font-size:#{pstyle.size}px;"
+        style << "background-image: url('#{image_path(text.path)}');"
+        div.set_attribute("style", style)
+      end 
+    end 
+    raw(frag)
+  end 
+
   # This method returns the public path to the rendered text. The parameters are the same
   # as the two first parameters of the pretty_text method.
   def pretty_text_path(str, style = nil)
     text = PrettyText::Text.create(str, style);
     return text.path
   end
+
+  #def pretty_paragraph(html, styles)
+  #  html
+  #end
 
   def pretty_text_includes
     stylesheet_link_tag('pretty_text')
