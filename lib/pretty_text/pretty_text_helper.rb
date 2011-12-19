@@ -35,7 +35,7 @@ module ApplicationHelper
     style << "background-image: url('#{image_path(text.path)}');"
 
     ret =  "<#{tag} style=\"#{style}\"#{tag_options}>"
-    ret << h(text.content) unless options[:only_image]
+    ret << h(text.content).gsub(/\n/, '<br>') unless options[:only_image]
     ret << "</#{tag}>"
 
     raw(ret)
