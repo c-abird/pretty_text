@@ -51,7 +51,7 @@ module ApplicationHelper
   def pretty_inline_style(str, pstyle = nil)
     text = PrettyText::Text.create(str, pstyle)
     style  = "width:#{text.width}px;height:#{text.height}px;"
-    style << "background-image: url('#{image_path(text.path)}');"
+    style << "background-image:url('#{image_path(text.path)}');"
     style
   end
 
