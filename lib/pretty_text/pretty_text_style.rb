@@ -53,7 +53,6 @@ module PrettyText# :nodoc:
                  :yoffset => 0,
                  :kerning => 0,
                  :interline_spacing => 0,
-                 :html_font => nil,
                  :upscale => false}
 
     # define getters and setters with default
@@ -93,9 +92,8 @@ module PrettyText# :nodoc:
     # by the <tt>generate_filename</tt> method to retrieve the filename for a combilnation
     # of style attributes and a certain text.
     def generate_hash(str = "")
-      omit = [:html_font]
       to_hash = str
-      (@@default.keys - omit).each do |key|
+      @@default.keys.each do |key|
         to_hash += self.send(key).to_s
       end
       return  Digest::MD5.hexdigest(to_hash)

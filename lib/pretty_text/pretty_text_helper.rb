@@ -50,15 +50,8 @@ module ApplicationHelper
 
   def pretty_inline_style(str, pstyle = nil)
     text = PrettyText::Text.create(str, pstyle)
-
     style  = "width:#{text.width}px;height:#{text.height}px;"
     style << "background-image: url('#{image_path(text.path)}');"
-    if pstyle.html_font.nil?
-      style << "font-size:#{pstyle.size}px;"
-    else
-      style << "font:#{pstyle.html_font};"
-    end
-
     style
   end
 
@@ -68,10 +61,6 @@ module ApplicationHelper
     text = PrettyText::Text.create(str, style);
     return text.path
   end
-
-  #def pretty_paragraph(html, styles)
-  #  html
-  #end
 
   def pretty_text_includes
     stylesheet_link_tag('pretty_text')
