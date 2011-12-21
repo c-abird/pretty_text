@@ -40,11 +40,8 @@ module ApplicationHelper
     frag = Nokogiri::HTML::DocumentFragment.parse(html)
     styles.each do |element, pstyle|
       frag.xpath(element.to_s).each do |div|
-        text = PrettyText::Text.create(div.inner_html, pstyle)
-        div.set_attribute("class" , "pretty_text")
-        style  = "width:#{text.width}px;height:#{text.height}px;font-size:#{pstyle.size}px;"
-        style << "background-image: url('#{image_path(text.path)}');"
-        style << "font:#{style.html_font};" unless style.html_font.nil?
+        div.set_attribute("class" , "pretty_text #{div.get_attribute("class")}")
+        style = pretty_inline_style(div.inner_html, pstyle)
         div.set_attribute("style", style)
       end 
     end 
