@@ -24,18 +24,13 @@ module ApplicationHelper
   #
   # Use the html_options to append HTML options to the tag:
   #   <%= pretty_text("the text", @style, 'h1', {:class => "myclass"})
-  def pretty_text(str, style = nil, tag="span", html_options = {}, options = {})
-    text = PrettyText::Text.create(str, style)
-
+  def pretty_text(str, pstyle = nil, tag="span", html_options = {}, options = {})
     html_options[:class] = [html_options[:class]].push("pretty_text").compact.join(" ")
-    #convert_options_to_javascript!(html_options)
     tag_options = tag_options(html_options)
-
-    style  = "width:#{text.width}px;height:#{text.height}px;font-size:#{style.size}px;"
-    style << "background-image: url('#{image_path(text.path)}');"
+    style =  pretty_inline_style(str, pstyle)
 
     ret =  "<#{tag} style=\"#{style}\"#{tag_options}>"
-    ret << h(text.content).gsub(/\n/, '<br>') unless options[:only_image]
+    ret << h(str).gsub(/\n/, '<br>') unless options[:only_image]
     ret << "</#{tag}>"
 
     raw(ret)
@@ -49,11 +44,26 @@ module ApplicationHelper
         div.set_attribute("class" , "pretty_text")
         style  = "width:#{text.width}px;height:#{text.height}px;font-size:#{pstyle.size}px;"
         style << "background-image: url('#{image_path(text.path)}');"
+        style << "font:#{style.html_font};" unless style.html_font.nil?
         div.set_attribute("style", style)
       end 
     end 
     raw(frag)
   end 
+
+  def pretty_inline_style(str, pstyle = nil)
+    text = PrettyText::Text.create(str, pstyle)
+
+    style  = "width:#{text.width}px;height:#{text.height}px;"
+    style << "background-image: url('#{image_path(text.path)}');"
+    if pstyle.html_font.nil?
+      style << "font-size:#{pstyle.size}px;"
+    else
+      style << "font:#{pstyle.html_font};"
+    end
+
+    style
+  end
 
   # This method returns the public path to the rendered text. The parameters are the same
   # as the two first parameters of the pretty_text method.
