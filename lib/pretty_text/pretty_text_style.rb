@@ -95,7 +95,8 @@ module PrettyText# :nodoc:
           words = line.split(" ")
           wrapped_line = words.shift
           words.each do |word|
-            if gc.get_multiline_type_metrics("#{wrapped_line} #{word}").width > self.width
+            line_width = gc.get_multiline_type_metrics("#{wrapped_line} #{word}").width rescue 0
+            if line_width > self.width
               wrapped_text << wrapped_line
               wrapped_line = word
             else
@@ -107,7 +108,7 @@ module PrettyText# :nodoc:
         text = wrapped_text.join("\n")
       end
 
-      return text
+      text.blank? ? " " : text
     end
 
     # Generates a hash string of all attributes and a given string. This method is used
