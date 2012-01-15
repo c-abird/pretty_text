@@ -59,7 +59,7 @@ module PrettyText # :nodoc:
         gc.gravity = Magick::NorthWestGravity
         gc.fill = style.color
 
-        text_to_render = style.process_text(text)
+        text_to_render = style.process_text(text, gc)
         gc.text(0,0," ") # TODO ist there a better way?
 
         colors  = ([style.color] + style.additional_colors).flatten

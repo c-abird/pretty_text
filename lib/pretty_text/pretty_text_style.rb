@@ -47,6 +47,7 @@ module PrettyText# :nodoc:
                  :upcase => false,
                  :downcase => false,
                  :extra_width => 0,
+                 :width => 0,
                  :xextra => 0,
                  :xoffset => 0,
                  :yextra => 0,
@@ -82,9 +83,30 @@ module PrettyText# :nodoc:
 
     # Applies all text transformations to a given text, which includes only the
     # <tt>upcase</tt> option at the moment. Returns the transformed text.
-    def process_text(text)
+    def process_text(text, gc)
       text = Unicode::upcase(text)   if self.upcase
       text = Unicode::downcase(text) if self.downcase
+
+      # wrap text
+      if self.width > 0
+        lines = text.split("\n")
+        wrapped_text = []
+        lines.each do |line|
+          words = line.split(" ")
+          wrapped_line = words.shift
+          words.each do |word|
+            if gc.get_multiline_type_metrics("#{wrapped_line} #{word}").width > self.width
+              wrapped_text << wrapped_line
+              wrapped_line = word
+            else
+              wrapped_line << " #{word}"
+            end
+          end
+          wrapped_text << wrapped_line
+        end
+        text = wrapped_text.join("\n")
+      end
+
       return text
     end
 
