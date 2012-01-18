@@ -77,6 +77,7 @@ module PrettyText # :nodoc:
           gc.annotate(image, 0, 0, style.xoffset, style.yoffset + i * (metrics.height + style.yextra), text_to_render) do
             self.fill = color
             self.kerning = style.kerning
+            #self.font_weight = style.weight unless style.weight.nil?
           end
         end
         gc.draw(image)

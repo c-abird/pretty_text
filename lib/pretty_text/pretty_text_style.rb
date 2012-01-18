@@ -44,6 +44,7 @@ module PrettyText# :nodoc:
                  :bg_color => '#fff',
                  :size => 12,
                  :font => nil,
+                 #:weight => nil,
                  :upcase => false,
                  :downcase => false,
                  :extra_width => 0,
