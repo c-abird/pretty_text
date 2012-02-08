@@ -41,7 +41,7 @@ module ApplicationHelper
     styles.each do |element, pstyle|
       frag.xpath(element.to_s).each do |div|
         div.set_attribute("class" , "pretty_text #{div.get_attribute("class")}")
-        style = pretty_inline_style(div.inner_html, pstyle)
+        style = pretty_inline_style(div.inner_html.gsub(/<br[ \/]*>/,"\n"), pstyle)
         div.set_attribute("style", style)
       end 
     end 
